@@ -1,0 +1,108 @@
+<mat-card
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayoutGap="30px"
+  style="margin-top: 20px"
+>
+  <mat-card-header>
+    <mat-card-title>Employee Detail Form</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form
+      [formGroup]="employeeform"
+      *ngIf="employeeform"
+      fxLayout="matRowDef"
+      fxLayoutGap="30px"
+    >
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Id</mat-label>
+          <input matInput formControlName="id" name="id" />
+        </mat-form-field>
+        <mat-error *ngIf="employeeform.controls['id'].hasError('required')">
+          Id is <strong>required</strong>
+        </mat-error>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" name="name" />
+        </mat-form-field>
+        <mat-error *ngIf="employeeform.controls['name'].hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input matInput formControlName="age" name="age" />
+        </mat-form-field>
+        <mat-error *ngIf="employeeform.controls['age'].hasError('required')">
+          Age is <strong>required</strong>
+        </mat-error>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Position</mat-label>
+          <input matInput formControlName="position" name="position" />
+        </mat-form-field>
+        <mat-error
+          *ngIf="employeeform.controls['position'].hasError('required')"
+        >
+          Position is <strong>required</strong>
+        </mat-error>
+      </p>
+      <P>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="!isUpdate ? onSave() : OnChange()"
+          style="margin-top: 10px"
+        >
+          {{ !isUpdate ? "Save" : "Update" }}
+        </button>
+      </P>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef>Age</th>
+    <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>Position</th>
+    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+  </ng-container>
+  <!-- Action Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element" fxLayoutGap="20px">
+      <button mat-raised-button color="primary" (click)="onUpdate(element)">
+        Edit
+      </button>
+      <button mat-raised-button color="primary" (click)="onDelete(element)">
+        Delete
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
