@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
   loginform!: FormGroup;
   constructor(private router: Router) {
     this.loginform = new FormGroup({
-      email: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });
   }
@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
         'loggedInUser',
         JSON.stringify(this.loginform.value)
       );
+      localStorage.setItem('token', '12345');
+
       this.router.navigate(['/dashboard']);
     } else {
       alert('Enter the required Credential');

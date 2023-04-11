@@ -19,7 +19,14 @@
           <mat-label>Id</mat-label>
           <input matInput formControlName="id" name="id" />
         </mat-form-field>
-        <mat-error *ngIf="employeeform.controls['id'].hasError('required')">
+        <!-- through error after the validation  id checked -->
+        <mat-error
+          *ngIf="
+            employeeform.controls['id'].hasValidator &&
+            employeeform.controls['id'].invalid &&
+            employeeform.controls['id'].touched
+          "
+        >
           Id is <strong>required</strong>
         </mat-error>
       </p>
@@ -28,7 +35,13 @@
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" name="name" />
         </mat-form-field>
-        <mat-error *ngIf="employeeform.controls['name'].hasError('required')">
+        <mat-error
+          *ngIf="
+            employeeform.controls['name'].hasValidator &&
+            employeeform.controls['name'].invalid &&
+            employeeform.controls['name'].touched
+          "
+        >
           Name is <strong>required</strong>
         </mat-error>
       </p>
@@ -37,7 +50,13 @@
           <mat-label>Age</mat-label>
           <input matInput formControlName="age" name="age" />
         </mat-form-field>
-        <mat-error *ngIf="employeeform.controls['age'].hasError('required')">
+        <mat-error
+          *ngIf="
+            employeeform.controls['age'].hasValidator &&
+            employeeform.controls['age'].invalid &&
+            employeeform.controls['age'].touched
+          "
+        >
           Age is <strong>required</strong>
         </mat-error>
       </p>
@@ -47,7 +66,12 @@
           <input matInput formControlName="position" name="position" />
         </mat-form-field>
         <mat-error
-          *ngIf="employeeform.controls['position'].hasError('required')"
+          *ngIf="
+            employeeform.controls['position'].hasValidator &&
+            employeeform.controls['position'].invalid &&
+            (employeeform.controls['position'].touched ||
+              employeeform.controls['position'].dirty)
+          "
         >
           Position is <strong>required</strong>
         </mat-error>
@@ -56,6 +80,7 @@
         <button
           mat-raised-button
           color="accent"
+          [disabled]="employeeform.invalid"
           (click)="!isUpdate ? onSave() : OnChange()"
           style="margin-top: 10px"
         >

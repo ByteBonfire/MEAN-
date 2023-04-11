@@ -18,6 +18,16 @@
           <input matInput formControlName="email" />
           <mat-icon matSuffix>email</mat-icon>
         </mat-form-field>
+        <mat-error
+          *ngIf="
+            loginform.controls['email'].hasValidator &&
+            loginform.controls['email'].invalid &&
+            (loginform.controls['email'].touched ||
+              loginform.controls['email'].dirty)
+          "
+        >
+          Email is <strong>required</strong>
+        </mat-error>
       </p>
       <p>
         <mat-form-field appearance="outline">
@@ -25,6 +35,16 @@
           <input matInput formControlName="password" />
           <mat-icon matSuffix>vpn_key</mat-icon>
         </mat-form-field>
+        <mat-error
+          *ngIf="
+            loginform.controls['password'].hasValidator &&
+            loginform.controls['password'].invalid &&
+            (loginform.controls['password'].touched ||
+              loginform.controls['password'].dirty)
+          "
+        >
+          password is <strong>required</strong>
+        </mat-error>
       </p>
       <button mat-raised-button color="warn" (click)="login()">Login</button>
     </form>

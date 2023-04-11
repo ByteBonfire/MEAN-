@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { EmployeeModule } from './employee/employee.module';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthGuard } from 'src/app/service/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,5 +21,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
   ],
+  providers: [AuthGuard],
 })
 export class DashboardModule {}
