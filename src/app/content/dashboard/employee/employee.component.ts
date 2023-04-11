@@ -46,14 +46,14 @@ export class EmployeeComponent implements OnInit {
     const rowIndex = this.dataSource.indexOf(element);
     // console.log(rowIndex);
     this.selectedRow = rowIndex; // sve index inthe new variable
-    
+
     // this.employeeform.controls['id'].setValue(element.id);
     // this.employeeform.controls['name'].setValue(element.name);
     // this.employeeform.controls['age'].setValue(element.age);
     // this.employeeform.controls['position'].setValue(element.position);
-    
+
     // use this instead of above multiple line code
-    this.employeeform.setValue(element)
+    this.employeeform.setValue(element);
   }
 
   OnChange() {

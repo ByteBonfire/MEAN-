@@ -5,6 +5,7 @@ import { EmployeeModule } from './employee/employee.module';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthGuard } from 'src/app/service/auth.guard';
+import { EmployeeTemplateModule } from './employee-template/employee-template.module';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     EmployeeModule,
     RouterModule.forChild(routes),
     SharedModule,
+    EmployeeTemplateModule,
   ],
   providers: [AuthGuard],
 })
