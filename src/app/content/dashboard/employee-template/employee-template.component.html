@@ -6,12 +6,7 @@
 >
   <mat-card-title>Employee Template Driven Form</mat-card-title>
   <mat-card-content>
-    <form
-      *ngIf="employee"
-      fxLayout="matRowDef"
-      fxLayoutGap="10px"
-      #employeeForm="ngForm"
-    >
+    <form *ngIf="employee" fxLayout="matRowDef" fxLayoutGap="10px">
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
@@ -54,6 +49,13 @@
             placeholder="Phone"
             [(ngModel)]="employee.phone"
             name="phone"
+            name=""
+            ;
+            address=""
+            ;
+            email=""
+            ;
+            phone
           />
         </mat-form-field>
       </p>
