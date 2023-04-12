@@ -20,7 +20,7 @@
             [(ngModel)]="employee.name"
             name="name"
             minlength="3"
-            maxlength="“30”"
+            maxlength="30"
             #name="ngModel"
             required
           />
@@ -29,7 +29,8 @@
           *ngIf="name.errors?.['required'] && name.dirty && name.touched"
           >Name is required.</mat-error
         >
-        <mat-error *ngIf="name.errors?.['minlength'] && name.dirty"
+        <mat-error
+          *ngIf="name.errors?.['minlength'] && name.dirty && name.errors?.['maxlength']"
           >Name must contain more than 3 letter</mat-error
         >
       </p>
