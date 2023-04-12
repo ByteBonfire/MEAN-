@@ -6,17 +6,32 @@
 >
   <mat-card-title>Employee Template Driven Form</mat-card-title>
   <mat-card-content>
-    <form *ngIf="employee" fxLayout="matRowDef" fxLayoutGap="10px">
+    <form
+      *ngIf="employee"
+      fxLayout="matRowDef"
+      fxLayoutGap="10px"
+      #form="ngForm"
+    >
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
           <input
             matInput
-            placeholder="Name"
             [(ngModel)]="employee.name"
             name="name"
+            minlength="3"
+            maxlength="“30”"
+            #name="ngModel"
+            required
           />
         </mat-form-field>
+        <mat-error
+          *ngIf="name.errors?.['required'] && name.dirty && name.touched"
+          >Name is required.</mat-error
+        >
+        <mat-error *ngIf="name.errors?.['minlength'] && name.dirty"
+          >Name must contain more than 3 letter</mat-error
+        >
       </p>
       <p>
         <mat-form-field appearance="outline">
@@ -26,8 +41,18 @@
             placeholder="Email"
             [(ngModel)]="employee.email"
             name="email"
+            pattern="^([\w]*[\w\.]*(?!\.)@gmail.com)"
+            #email="ngModel"
+            required
           />
         </mat-form-field>
+        <mat-error
+          *ngIf="email.errors?.['required'] && email.dirty && email.touched"
+          >email is required.</mat-error
+        >
+        <mat-error *ngIf="email.errors?.['pattern'] && email.dirty "
+          >Email be like :"example@gmail.com" .</mat-error
+        >
       </p>
 
       <p>
@@ -38,8 +63,15 @@
             placeholder="Address"
             [(ngModel)]="employee.address"
             name="address"
+            #address="ngModel"
+            required
           />
         </mat-form-field>
+        <mat-error
+          *ngIf=" address.dirty && address.errors?.['required'] && address.touched"
+        >
+          Enter an Address
+        </mat-error>
       </p>
       <p>
         <mat-form-field appearance="outline">
@@ -49,19 +81,34 @@
             placeholder="Phone"
             [(ngModel)]="employee.phone"
             name="phone"
-            name=""
-            ;
-            address=""
-            ;
-            email=""
-            ;
-            phone
+            pattern="[0-9]*"
+            #phone="ngModel"
+            required
           />
         </mat-form-field>
+        <mat-error
+          *ngIf="(phone.errors?.['required'] && phone.dirty )&& phone.touched"
+          >Phone is required.</mat-error
+        >
+        <mat-error *ngIf="phone.errors?.['pattern'] && phone.dirty"
+          >Phone must contain only numbers.</mat-error
+        >
       </p>
-      <p>
-        <button mat-raised-button color="primary" (click)="onSubmit()">
+      <p fxLayoutGap="10px">
+        <button
+          mat-raised-button
+          [disabled]="form.invalid"
+          color="primary"
+          (click)="onSubmit()"
+        >
           Submit
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="form.reset({}); isUpdate = false"
+        >
+          Reset
         </button>
       </p>
     </form>
@@ -100,7 +147,7 @@
         <button mat-raised-button color="primary" (click)="onUpdate(element)">
           Edit
         </button>
-        <button mat-raised-button color="primary" (click)="onDelete()">
+        <button mat-raised-button color="primary" (click)="onDelete(element)">
           Delete
         </button>
       </td>

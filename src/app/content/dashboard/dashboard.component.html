@@ -1,7 +1,12 @@
-<p fxLayout="row" fxLayoutAlign="end center">
+<p fxLayout="row" fxLayoutAlign="end ">
   <button mat-raised-button color="primary" (click)="logout()">Logout</button>
 </p>
-<app-employee></app-employee>
-<br />
+<p fxLayoutAlign="space-evenly ">
+  <button mat-raised-button color="accent" routerLink="employee">
+    Reactive Form
+  </button>
 
-<app-employee-template></app-employee-template>
+  <button mat-raised-button color="primary" routerLink="templateEmployee">
+    Template Form
+  </button>
+</p>

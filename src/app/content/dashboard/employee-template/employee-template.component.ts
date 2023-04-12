@@ -33,18 +33,20 @@ export class EmployeeTemplateComponent {
     const dataSourceValues = this.employee;
     this.dataSource.push(dataSourceValues);
     this.table.renderRows(); //render the table row
-    // employeeForm.form.reset();
-    this.employee = null;
-  }
-
-  onUpdate(element: any) {
     this.isUpdate = true;
-    alert(' edit event is fired');
-    const rowIndex = this.dataSource.indexOf(element);
-    console.log(rowIndex);
-    this.selectedRow = rowIndex; // sve index inthe new variable
-
-    this.employee.setValue = element;
   }
-  onDelete() {}
+
+  // onReset(form: NgForm) {
+  //   this.isUpdate = false;
+  //   this.employee = '';
+  //   form.reset({});
+  // }
+  onUpdate(element: any) {
+    const rowIndex = this.dataSource.indexOf(element);
+  }
+  onDelete(element: any) {
+    const rowIndex = this.dataSource.indexOf(element);
+    this.dataSource.splice(rowIndex, 1);
+    this.table.renderRows(); //render the table row
+  }
 }
