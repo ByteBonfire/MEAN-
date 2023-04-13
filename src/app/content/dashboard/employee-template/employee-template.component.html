@@ -22,6 +22,7 @@
             minlength="3"
             maxlength="30"
             #name="ngModel"
+            pattern="[a-zA-Z]*"
             required
           />
         </mat-form-field>
@@ -30,8 +31,11 @@
           >Name is required.</mat-error
         >
         <mat-error
-          *ngIf="name.errors?.['minlength'] && name.dirty && name.errors?.['maxlength']"
-          >Name must contain more than 3 letter</mat-error
+          *ngIf="(name.errors?.['minlength'] || name.errors?.['maxlength'] )&& name.dirty"
+          >Name between 3 - 30 letter</mat-error
+        >
+        <mat-error *ngIf="name.errors?.['pattern'] && name.dirty"
+          >Name only contain letter</mat-error
         >
       </p>
       <p>
