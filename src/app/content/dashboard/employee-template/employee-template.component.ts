@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Employee } from './employee-template.model';
 import { MatTable } from '@angular/material/table';
-import { NgForm } from '@angular/forms';
+// import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-template',

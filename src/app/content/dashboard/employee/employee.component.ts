@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 
 @Component({
@@ -9,7 +15,14 @@ import { MatTable } from '@angular/material/table';
 })
 export class EmployeeComponent implements OnInit {
   employeeform: FormGroup;
-  displayedColumns: string[] = ['id', 'name', 'age', 'position', 'action'];
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'age',
+    'position',
+    'hobby',
+    'action',
+  ];
   dataSource: any[] = [];
 
   isUpdate = false;
@@ -17,21 +30,40 @@ export class EmployeeComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
-  constructor() {
-    this.employeeform = new FormGroup({
+  constructor(private fb: FormBuilder) {}
+  ngOnInit() {
+    this.employeeform = this.fb.group({
       id: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
       position: new FormControl('', Validators.required),
+      hobbies: this.fb.array([this.createHobby()]),
     });
   }
-  ngOnInit(): void {}
+  get hobbies(): FormArray {
+    return this.employeeform.controls['hobbies'] as FormArray;
+  }
+
+  createHobby(): FormGroup {
+    return this.fb.group({
+      hobby: '',
+    });
+  }
+  addHobby(): void {
+    this.hobbies.push(this.createHobby());
+
+    console.log(this.hobbies);
+  }
+
+  deleteHobby(index: number): void {
+    this.hobbies.removeAt(index);
+  }
 
   onSave() {
     if (this.employeeform.invalid) {
       alert('Please Enter the value before proceeding');
     } else {
-      // console.log(this.employeeform.value);
+      console.log(this.employeeform.value);
       const dataSourceValues = this.employeeform.value;
       this.dataSource.push(dataSourceValues);
       this.table.renderRows(); //render the table row
@@ -71,6 +103,7 @@ export class EmployeeComponent implements OnInit {
     this.table.renderRows(); //render the table row
   }
 }
+
 //  dirty // change
 //  touch  // touch
 //  pristine // clear

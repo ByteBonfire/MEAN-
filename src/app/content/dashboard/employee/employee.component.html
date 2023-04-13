@@ -19,7 +19,6 @@
           <mat-label>Id</mat-label>
           <input matInput formControlName="id" name="id" />
         </mat-form-field>
-        <!-- through error after the validation  id checked -->
         <mat-error
           *ngIf="
             employeeform.controls['id'].hasValidator &&
@@ -76,6 +75,38 @@
           Position is <strong>required</strong>
         </mat-error>
       </p>
+      <p>
+        <ng-container formArrayName="hobbies">
+          <ng-container
+            *ngFor="let hobbiesform of hobbies.controls; let i = index"
+          >
+            <div [formGroupName]="i">
+              <mat-form-field appearance="outline">
+                <mat-label>Hobby</mat-label>
+                <input matInput formControlName="hobby" name="hobby" />
+              </mat-form-field>
+              <mat-icon
+                style="position: absolute; margin-left: 3px"
+                (click)="deleteHobby(i)"
+              >
+                delete_forever</mat-icon
+              >
+              <mat-error
+                *ngIf="
+                  hobbiesform.get('hobby')?.hasError('required') &&
+                  hobbiesform.get('hobby')?.hasError('dirty')
+                "
+              >
+                Enter you hobby
+              </mat-error>
+            </div>
+          </ng-container>
+
+          <button mat-mini-fab (click)="addHobby()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </ng-container>
+      </p>
       <P>
         <button
           mat-raised-button
@@ -115,6 +146,13 @@
     <th mat-header-cell *matHeaderCellDef>Position</th>
     <td mat-cell *matCellDef="let element">{{ element.position }}</td>
   </ng-container>
+
+  <!-- hobby -->
+  <ng-container matColumnDef="hobby">
+    <th mat-header-cell *matHeaderCellDef>Hobby</th>
+    <td mat-cell *matCellDef="let element">{{ element.hobby }}</td>
+  </ng-container>
+
   <!-- Action Column -->
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>Action</th>
