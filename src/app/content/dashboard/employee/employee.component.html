@@ -150,7 +150,13 @@
   <!-- hobby -->
   <ng-container matColumnDef="hobby">
     <th mat-header-cell *matHeaderCellDef>Hobby</th>
-    <td mat-cell *matCellDef="let element">{{ element.hobby }}</td>
+    <td mat-cell *matCellDef="let element">
+      <ul>
+        <li *ngFor="let hobby of element.hobbies">
+          {{ hobby.hobby }}
+        </li>
+      </ul>
+    </td>
   </ng-container>
 
   <!-- Action Column -->
