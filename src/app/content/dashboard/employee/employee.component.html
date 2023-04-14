@@ -94,7 +94,7 @@
               <mat-error
                 *ngIf="
                   hobbiesform.get('hobby')?.hasError('required') &&
-                  hobbiesform.get('hobby')?.hasError('dirty')
+                  (hobbiesform.dirty || hobbiesform.touched)
                 "
               >
                 Enter you hobby

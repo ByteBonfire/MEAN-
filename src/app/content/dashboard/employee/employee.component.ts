@@ -46,7 +46,7 @@ export class EmployeeComponent implements OnInit {
 
   createHobby(): FormGroup {
     return this.fb.group({
-      hobby: '',
+      hobby: ['', Validators.required],
     });
   }
   addHobby(): void {
