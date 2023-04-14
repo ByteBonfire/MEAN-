@@ -151,11 +151,9 @@
   <ng-container matColumnDef="hobby">
     <th mat-header-cell *matHeaderCellDef>Hobby</th>
     <td mat-cell *matCellDef="let element">
-      <ul>
-        <li *ngFor="let hobby of element.hobbies">
-          {{ hobby.hobby }}
-        </li>
-      </ul>
+      <option *ngFor="let hobby of element.hobbies">
+        {{ hobby.hobby }}
+      </option>
     </td>
   </ng-container>
 
