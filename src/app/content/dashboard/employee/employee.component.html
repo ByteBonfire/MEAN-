@@ -83,7 +83,13 @@
             <div [formGroupName]="i">
               <mat-form-field appearance="outline">
                 <mat-label>Hobby</mat-label>
-                <input matInput formControlName="hobby" name="hobby" />
+                <input
+                  matInput
+                  formControlName="hobby"
+                  minlength="4"
+                  name="hobby"
+                  pattern="[a-z\sA-Z]+"
+                />
               </mat-form-field>
               <mat-icon
                 style="position: absolute; margin-left: 3px"
@@ -98,6 +104,22 @@
                 "
               >
                 Enter you hobby
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  hobbiesform.get('hobby')?.hasError('pattern') &&
+                  (hobbiesform.dirty || hobbiesform.touched)
+                "
+              >
+                Hobby Should only contain letter
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  hobbiesform.get('hobby')?.hasError('minlength') &&
+                  (hobbiesform.dirty || hobbiesform.touched)
+                "
+              >
+                Hobby should more than 4 letter
               </mat-error>
             </div>
           </ng-container>
